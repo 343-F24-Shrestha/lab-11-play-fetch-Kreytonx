@@ -13,10 +13,10 @@ document.getElementById("get-btn").addEventListener("click", async () => {
 
     try{
         let data = await resp.json();
-        document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+        output.textContent = JSON.stringify(data, null, 2);
     } 
     catch(error){
-        document.getElementById("output").textContent = `Error: ` + error.message;
+        output.textContent = `Error: ` + error.message;
     }
 }); 
 
