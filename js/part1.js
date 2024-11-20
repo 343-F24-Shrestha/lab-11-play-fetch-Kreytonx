@@ -5,7 +5,20 @@ document.getElementById("get-btn").addEventListener("click", async () => {
     // The two input fields should be included in the request URL as **query parameters**
 
     // TODO
-});
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+
+    let params = new URLSearchParams({ name, age });
+    let resp = await fetch(`https://echo.zuplo.io/api?` + params.toString());
+
+    try{
+        let data = await resp.json();
+        document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    } 
+    catch(error){
+        document.getElementById("output").textContent = `Error: ` + error.message;
+    }
+}); 
 
 document.getElementById("post-json-btn").addEventListener("click", async () => {
     // This function should send a POST request to the echo endpoint with the input data as JSON
