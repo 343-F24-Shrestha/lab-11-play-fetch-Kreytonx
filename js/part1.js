@@ -25,6 +25,26 @@ document.getElementById("post-json-btn").addEventListener("click", async () => {
     // The two input fields should be included in the request body as **JSON data**
 
     // TODO
+    // Get the values of the input fields
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+
+    try{
+        let response = await fetch("https://echo.zuplo.io/api", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, age })
+        });
+
+        let data = await response.json();
+
+        output.textContent = JSON.stringify(data, null, 2);
+    } 
+    catch(error){
+        output.textContent = `Error: ${error.message}`;
+    }
 });
 
 document.getElementById("post-form-btn").addEventListener("click", async () => {
@@ -32,4 +52,26 @@ document.getElementById("post-form-btn").addEventListener("click", async () => {
     // The two input fields should be included in the request body as **url-encoded data**
 
     // TODO
+    // Get the values of the input fields
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+
+    try{
+        let formData = new URLSearchParams({ name, age });
+
+        let response = await fetch("https://echo.zuplo.io/api", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData.toString()
+        });
+
+        let data = await response.json();
+
+        output.textContent = JSON.stringify(data, null, 2);
+    } 
+    catch (error){
+        output.textContent = `Error: ${error.message}`;
+    }
 });
