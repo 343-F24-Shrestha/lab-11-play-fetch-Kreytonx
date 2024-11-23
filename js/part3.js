@@ -6,6 +6,17 @@ document.getElementById('api-1-btn').addEventListener('click', async () => {
     // If your response has no body, put the status code in output-1.
 
     // TODO
+    try{
+        const response = await fetch('https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=Arsenal');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        output1.textContent = JSON.stringify(data, null, 2);
+    } 
+    catch(error){
+        output1.textContent = `Error: ${error.message}`;
+    }
 });
 
 document.getElementById('api-2-btn').addEventListener('click', async () => {
@@ -13,4 +24,15 @@ document.getElementById('api-2-btn').addEventListener('click', async () => {
     // If your response has no body, put the status code in output-2.
     
     // TODO
+    try{
+        const response = await fetch('https://www.thesportsdb.com/api/v1/json/3/searchplayers.php?p=Lionel Messi');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        output2.textContent = JSON.stringify(data, null, 2);
+    } 
+    catch(error){
+        output2.textContent = `Error: ${error.message}`;
+    }
 });
